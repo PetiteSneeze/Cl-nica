@@ -8,6 +8,7 @@ use App\Models\Paciente;
 
 class Problema extends Model
 {
+    
     use HasFactory;
     protected $fillable = [
         'paciente_id',

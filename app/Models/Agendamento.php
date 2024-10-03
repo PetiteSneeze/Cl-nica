@@ -11,4 +11,8 @@ class Agendamento extends Model
     protected $fillable = ['data',
                             'hora',
                             'paciente_id'];
+
+    public function paciente(){
+        return $this->belongsTo(Paciente::class);
+    }
 }
