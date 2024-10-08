@@ -5,7 +5,6 @@ use Illuminate\Http\Request;
 use App\Models\Problema;
 use App\Models\Paciente;
 use Illuminate\Support\Facades\Auth;
-use Psy\VarDumper\Presenter;
 
 class ProblemaController extends Controller
 {
