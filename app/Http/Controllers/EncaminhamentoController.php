@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
+namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\Agendamento;
+use App\Models\Diagnostico;
+use App\Models\Encaminhamento;
 use App\Models\Paciente;
 use Illuminate\Support\Facades\Auth;
 
-class AgendamentoController extends Controller
+class EncaminhamentoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +19,8 @@ class AgendamentoController extends Controller
         $userId = Auth::id();
         $paciente = Paciente::where('user_id', $userId)->get();
         $pacientesId = $paciente->pluck("id");
-        $agendamento = Agendamento::whereIn('agendamento', $paciente)->get();
-        return view('agendamento.index', compact('agendamento', 'pacientesId'));
+        $encaminhamento = Encaminhamento::whereIn('encaminhamento', $paciente)->get();
+        return view('encaminhamento.index', compact('encaminhamento', 'pacientesId'));
     }
 
     /**
@@ -27,7 +30,7 @@ class AgendamentoController extends Controller
     {
         $userId = Auth::id();
         $pacientes = Paciente::where('user_id', $userId)->get();
-        return view('agendamento.create');
+        return view('encaminhamento.create');
     }
 
     /**
@@ -35,8 +38,8 @@ class AgendamentoController extends Controller
      */
     public function store(Request $request)
     {
-        Agendamento::create($request->all());
-        return redirect()->route('agendamento.index')
+        Encaminhamento::create($request->all());
+        return redirect()->route('encaminhamento.index')
                                 ->with('insercao','Inserido com sucesso!');
     }
 
@@ -45,8 +48,8 @@ class AgendamentoController extends Controller
      */
     public function show(string $id)
     {
-        $agendamento = Agendamento::findOrfail($id);
-        return view('agendamento.show', compact('agendamento'));
+        $encaminhamento = Encaminhamento::findOrfail($id);
+        return view('encaminhamento.show', compact('encaminhamento'));
     }
 
     /**
@@ -54,8 +57,8 @@ class AgendamentoController extends Controller
      */
     public function edit(string $id)
     {
-        $agendamento = Agendamento::findOrfail($id);
-        return view('agendamento.edit', compact('agendamento'));
+        $encaminhamento = Encaminhamento::findOrfail($id);
+        return view('encaminhamento.edit', compact('encaminhamento'));
     }
 
     /**
@@ -63,9 +66,9 @@ class AgendamentoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $agendamento = Agendamento::findOrfail($id);
-        $agendamento->update($request->all());
-        return redirect()->route('agendamento.index')
+        $encaminhamento = Encaminhamento::findOrfail($id);
+        $encaminhamento->update($request->all());
+        return redirect()->route('encaminhamento.index')
                                 ->with('atualizacao','Atualizado com sucesso!');
     }
 
