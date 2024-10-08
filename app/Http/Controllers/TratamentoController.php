@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
-use App\Models\Prescricao;
+use App\Models\Tratamento;
 use App\Models\Paciente;
 use Illuminate\Support\Facades\Auth;
 
-
-class PrescricaoController extends Controller
+class TratamentoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class PrescricaoController extends Controller
         $userId = Auth::id();
         $paciente = Paciente::where('user_id', $userId)->get();
         $pacientesId = $paciente->pluck("id");
-        $prescricao = Prescricao::whereIn('prescricao', $paciente)->get();
-        return view('prescricao.index', compact('prescricao', 'pacientesId'));
+        $tratamento = Tratamento::whereIn('paciente', $paciente)->get();
+        return view('tratamento.index', compact('tratamento', 'pacientesId'));
     }
 
     /**
@@ -28,7 +28,7 @@ class PrescricaoController extends Controller
     {
         $userId = Auth::id();
         $pacientes = Paciente::where('user_id', $userId)->get();
-        return view('prescricao.create');
+        return view('tratamento.create');
     }
 
     /**
@@ -36,8 +36,8 @@ class PrescricaoController extends Controller
      */
     public function store(Request $request)
     {
-        Prescricao::create($request->all());
-        return redirect()->route('prescricao.index')
+        Tratamento::create($request->all());
+        return redirect()->route('tratamento.index')
                                 ->with('insercao','Inserido com sucesso!');
     }
 
@@ -46,8 +46,8 @@ class PrescricaoController extends Controller
      */
     public function show(string $id)
     {
-        $prescricao = Prescricao::findOrfail($id);
-        return view('prescricao.show', compact('prescricao'));
+        $tratamento = Tratamento::findOrfail($id);
+        return view('tratamento.show', compact('tratamento'));
     }
 
     /**
@@ -55,8 +55,8 @@ class PrescricaoController extends Controller
      */
     public function edit(string $id)
     {
-        $prescricao = Prescricao::findOrfail($id);
-        return view('prescricao.edit', compact('prescricao'));
+        $tratamento = Tratamento::findOrfail($id);
+        return view('tratamento.edit', compact('tratamento'));
     }
 
     /**
@@ -64,12 +64,11 @@ class PrescricaoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $prescricao = Prescricao::findOrfail($id);
-        $prescricao->update($request->all());
-        return redirect()->route('prescricao.index')
+        $tratamento = Tratamento::findOrfail($id);
+        $tratamento->update($request->all());
+        return redirect()->route('tratamento.index')
                                 ->with('atualizacao','Atualizado com sucesso!');
     }
-
     /**
      * Remove the specified resource from storage.
      */
