@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
-namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\Encaminhamento;
+use App\Models\Prescricao;
 use App\Models\Paciente;
 use Illuminate\Support\Facades\Auth;
+use Psy\VarDumper\Presenter;
 
-class EncaminhamentoController extends Controller
+class PrescricaoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +17,8 @@ class EncaminhamentoController extends Controller
         $userId = Auth::id();
         $paciente = Paciente::where('user_id', $userId)->get();
         $pacientesId = $paciente->pluck("id");
-        $encaminhamento = Encaminhamento::whereIn('encaminhamento', $paciente)->get();
-        return view('encaminhamento.index', compact('encaminhamento', 'pacientesId'));
+        $prescricao = Prescricao::whereIn('prescricao', $paciente)->get();
+        return view('prescricao.index', compact('prescricao', 'pacientesId'));
     }
 
     /**
@@ -29,7 +28,7 @@ class EncaminhamentoController extends Controller
     {
         $userId = Auth::id();
         $pacientes = Paciente::where('user_id', $userId)->get();
-        return view('encaminhamento.create');
+        return view('prescricao.create');
     }
 
     /**
@@ -37,8 +36,8 @@ class EncaminhamentoController extends Controller
      */
     public function store(Request $request)
     {
-        Encaminhamento::create($request->all());
-        return redirect()->route('encaminhamento.index')
+        Prescricao::create($request->all());
+        return redirect()->route('prescricao.index')
                                 ->with('insercao','Inserido com sucesso!');
     }
 
@@ -47,8 +46,8 @@ class EncaminhamentoController extends Controller
      */
     public function show(string $id)
     {
-        $encaminhamento = Encaminhamento::findOrfail($id);
-        return view('encaminhamento.show', compact('encaminhamento'));
+        $prescricao = Prescricao::findOrfail($id);
+        return view('prescricao.show', compact('prescricao'));
     }
 
     /**
@@ -56,8 +55,8 @@ class EncaminhamentoController extends Controller
      */
     public function edit(string $id)
     {
-        $encaminhamento = Encaminhamento::findOrfail($id);
-        return view('encaminhamento.edit', compact('encaminhamento'));
+        $prescricao = Prescricao::findOrfail($id);
+        return view('prescricao.edit', compact('prescricao'));
     }
 
     /**
@@ -65,9 +64,9 @@ class EncaminhamentoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $encaminhamento = Encaminhamento::findOrfail($id);
-        $encaminhamento->update($request->all());
-        return redirect()->route('encaminhamento.index')
+        $prescricao = Prescricao::findOrfail($id);
+        $prescricao->update($request->all());
+        return redirect()->route('prescricao.index')
                                 ->with('atualizacao','Atualizado com sucesso!');
     }
 
