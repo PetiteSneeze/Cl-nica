@@ -28,7 +28,7 @@ class AvaliacaoPsicologicaController extends Controller
     {
         $userId = Auth::id();
         $pacientes = Paciente::where('user_id', $userId)->get();
-        return view('avaliacao.create');
+        return view('avaliacao.create', compact("pacientes"));
     }
 
     /**
