@@ -20,7 +20,7 @@
                 <td>{{ $a->data_avaliacao}}</td>
                 <td>{{ $a->paciente->nome}}</td>
                 <td>
-                    <a href="/avaliacao/{{$a->id}}">
+                    <a href="/avaliacao/{{$a->id}}" class="btn btn-secondary">
                         Visualizar registro
                     </a>
                     <a href="/avaliacao/{{ $a->id }}/edit" class="btn btn-warning">
