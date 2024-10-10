@@ -15,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach $avaliacoes as $a
+        @foreach ($avaliacoes as $a)
             <tr>
                 <td>{{ $a->data_avaliacao}}</td>
                 <td>{{ $a->paciente->nome}}</td>

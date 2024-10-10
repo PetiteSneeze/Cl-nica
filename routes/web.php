@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PacienteController;
-use App\Http\Controllers\AvaliacaoController;
+use App\Http\Controllers\AvaliacaoPsicologicaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
