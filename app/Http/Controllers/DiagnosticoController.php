@@ -27,7 +27,7 @@ class DiagnosticoController extends Controller
     {
         $userId = Auth::id();
         $pacientes = Paciente::where('user_id', $userId)->get();
-        return view('diagnostico.create');
+        return view('diagnostico.create',compact("pacientes"));
     }
 
     /**

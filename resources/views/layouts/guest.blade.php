@@ -1,4 +1,3 @@
-<!--Guest.blade.php-->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -15,19 +14,46 @@
         <!-- Bootstrap CSS -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
+        <!-- Custom Styles -->
+        <style>
+            body {
+                font-family: 'Figtree', sans-serif;
+                background-color: #f0f4f8;
+                color: #4a5568;
+            }
+            .guest-container {
+                max-width: 400px;
+                margin-top: 50px;
+                border-radius: 15px;
+                background-color: white;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+                padding: 30px;
+            }
+            .logo-container {
+                margin-bottom: 30px;
+            }
+            .logo-container svg {
+                height: 80px;
+                width: 80px;
+                fill: #4a90e2;
+            }
+            .bg-light-custom {
+                background-color: #e2edf8;
+            }
+        </style>
     </head>
-    <body class="font-sans text-gray-900">
-        <div class="min-vh-100 d-flex flex-column justify-content-center align-items-center bg-light">
-            <div>
+    <body class="d-flex justify-content-center align-items-center min-vh-100 bg-light-custom">
+        <div class="guest-container text-center">
+            <!-- Logo -->
+            <div class="logo-container">
                 <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                    <x-application-logo />
                 </a>
             </div>
 
-            <div class="w-100" style="max-width: 400px;">
-                <div class="mt-4 p-4 bg-white shadow rounded">
-                    {{ $slot }}
-                </div>
+            <!-- Content Slot -->
+            <div>
+                {{ $slot }}
             </div>
         </div>
 

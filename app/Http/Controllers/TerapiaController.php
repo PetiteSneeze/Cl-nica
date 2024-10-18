@@ -28,7 +28,7 @@ class TerapiaController extends Controller
     {
         $userId = Auth::id();
         $pacientes = Paciente::where('user_id', $userId)->get();
-        return view('terapia.create');
+        return view('terapia.create',compact("pacientes"));
     }
 
     /**

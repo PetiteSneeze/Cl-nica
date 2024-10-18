@@ -1,4 +1,3 @@
-<!--App.blade.php-->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -15,23 +14,46 @@
         <!-- Bootstrap CSS -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Scripts -->
+        <!-- Custom Styles -->
+        <style>
+            body {
+                font-family: 'Figtree', sans-serif;
+                background-color: #f0f4f8;
+                color: #4a5568;
+            }
+            header {
+                background-color: #ffffff;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            main {
+                margin-top: 40px;
+                padding-bottom: 40px;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            .bg-light {
+                background-color: #e2edf8 !important;
+            }
+        </style>
     </head>
-    <body class="font-sans">
-        <div class="min-vh-100 bg-light">
+    <body class="font-sans bg-light">
+        <div class="min-vh-100">
+            <!-- Navigation -->
             @include('layouts.navigation')
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-white shadow">
-                    <div class="container py-6">
+                <header class="bg-white shadow py-4">
+                    <div class="container">
                         {{ $header }}
                     </div>
                 </header>
             @endisset
 
             <!-- Page Content -->
-            <main class="container mt-4">
+            <main class="container mt-5">
                 {{ $slot }}
             </main>
         </div>

@@ -27,7 +27,7 @@ class AgendamentoController extends Controller
     {
         $userId = Auth::id();
         $pacientes = Paciente::where('user_id', $userId)->get();
-        return view('agendamento.create');
+        return view('agendamento.create', compact("pacientes"));
     }
 
     /**

@@ -29,7 +29,7 @@ class EncaminhamentoController extends Controller
     {
         $userId = Auth::id();
         $pacientes = Paciente::where('user_id', $userId)->get();
-        return view('encaminhamento.create');
+        return view('encaminhamento.create',compact("pacientes"));
     }
 
     /**
