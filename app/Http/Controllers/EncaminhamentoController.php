@@ -18,7 +18,7 @@ class EncaminhamentoController extends Controller
         $userId = Auth::id();
         $paciente = Paciente::where('user_id', $userId)->get();
         $pacientesId = $paciente->pluck("id");
-        $encaminhamento = Encaminhamento::whereIn('encaminhamento', $paciente)->get();
+        $encaminhamento = Encaminhamento::whereIn('paciente_id', $pacientesId)->get();
         return view('encaminhamento.index', compact('encaminhamento', 'pacientesId'));
     }
 
@@ -57,7 +57,8 @@ class EncaminhamentoController extends Controller
     public function edit(string $id)
     {
         $encaminhamento = Encaminhamento::findOrfail($id);
-        return view('encaminhamento.edit', compact('encaminhamento'));
+        $pacientes = Paciente::all();
+        return view('encaminhamento.edit', compact('encaminhamento', 'pacientes'));
     }
 
     /**

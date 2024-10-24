@@ -13,7 +13,7 @@ class PacienteController extends Controller
     public function index()
     {
         $userId = Auth::id();
-        $paciente = Paciente::where('user_id', $userId)->get();
+        $pacientes = Paciente::where('user_id', $userId)->get();
         return view('paciente.index', compact('pacientes'));
     }
 
@@ -33,7 +33,7 @@ class PacienteController extends Controller
         $userId = Auth::id();
         $request->merge(['user_id' => $userId]);
         Paciente::create($request->all());
-        return redirect()->route('paciente.index')
+        return redirect()->route('pacientes.index')
         ->with('success', 'Paciente atualizado com sucesso.'); 
     }
 
@@ -62,7 +62,7 @@ class PacienteController extends Controller
     {
         $paciente = Paciente::findOrFail($id);
         $paciente->update($request->all());
-        return redirect()->route('paciente.index')
+        return redirect()->route('pacientes.index')
         ->with('success', 'Paciente atualizado com sucesso.'); 
                            
     }

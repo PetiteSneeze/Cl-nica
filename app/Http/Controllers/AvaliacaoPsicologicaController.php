@@ -17,8 +17,8 @@ class AvaliacaoPsicologicaController extends Controller
         $userId = Auth::id();
         $paciente = Paciente::where('user_id', $userId)->get();
         $pacientesId = $paciente->pluck("id");
-        $avaliacao = AvaliacaoPsicologica::whereIn('paciente', $paciente)->get();
-        return view('avaliacao.index', compact('avaliacao', 'pacientesId'));
+        $avaliacao = AvaliacaoPsicologica::whereIn('paciente_id', $pacientesId)->get();
+        return view('avaliacao.index', compact('avaliacao'));
     }
 
     /**
@@ -36,7 +36,9 @@ class AvaliacaoPsicologicaController extends Controller
      */
     public function store(Request $request)
     {
+
         AvaliacaoPsicologica::create($request->all());
+
         return redirect()->route('avaliacao.index')
                                 ->with('insercao','Inserido com sucesso!');
     }
@@ -56,7 +58,8 @@ class AvaliacaoPsicologicaController extends Controller
     public function edit(string $id)
     {
         $avaliacao = AvaliacaoPsicologica::findOrfail($id);
-        return view('avaliacao.edit', compact('avaliacao'));
+        $pacientes = Paciente::all();
+        return view('avaliacao.edit', compact('avaliacao', 'pacientes'));
     }
 
     /**

@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <h2>Gerenciar avaliações psicológicas</h2>
-    <a href="/avaliacao/create" class="btn btn-primary">
+    <a href="/encaminhamento/create" class="btn btn-primary">
         Novo Registro
     </a>
     <table class="table table-hover">
@@ -9,20 +9,23 @@
     <thead>
         <tr>
             <th>Paciente</th>
-            <th>Data da Avaliação</th>
+            <th>Data da Encaminhamento</th>
+            <th>Nome do Profissional</th>
             <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($avaliacao as $a)
+        @foreach ($encaminhamento as $a)
             <tr>
                 <td>{{ $a->paciente->nome }}</td>
-                <td>{{ \Carbon\Carbon::parse($a->data_avaliacao)->format('d/m/Y') }}</td>
+                <td>{{ \Carbon\Carbon::parse($a->data)->format('d/m/Y') }}</td>
+                <td>{{ $a->nome_profissional }}</td>
+
                 <td>
-                    <a href="/avaliacao/{{ $a->id }}" class="btn btn-secondary">
+                    <a href="/encaminhamento/{{ $a->id }}" class="btn btn-secondary">
                         Visualizar registro
                     </a>
-                    <a href="/avaliacao/{{ $a->id }}/edit" class="btn btn-warning">
+                    <a href="/encaminhamento/{{ $a->id }}/edit" class="btn btn-warning">
                         Editar
                     </a>
                     
