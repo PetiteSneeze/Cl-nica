@@ -6,6 +6,10 @@ use App\Http\Controllers\AvaliacaoPsicologicaController;
 use App\Http\Controllers\AgendamentoController;
 use App\Http\Controllers\DiagnosticoController;
 use App\Http\Controllers\EncaminhamentoController;
+use App\Http\Controllers\PrescricaoController;
+use App\Http\Controllers\ProblemaController;
+use App\Http\Controllers\TerapiaController;
+use App\Http\Controllers\TratamentoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,6 +29,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('agendamento', AgendamentoController::class);
     Route::resource('diagnostico', DiagnosticoController::class);
     Route::resource('/encaminhamento', EncaminhamentoController::class);
+    Route::resource('prescricao', PrescricaoController::class);
+    Route::resource('problema', ProblemaController::class);
+    Route::resource('terapia', TerapiaController::class);
+    Route::resource('tratamento', TratamentoController::class); 
 });
 
 require __DIR__.'/auth.php';

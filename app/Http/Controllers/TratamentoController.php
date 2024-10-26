@@ -17,7 +17,7 @@ class TratamentoController extends Controller
         $userId = Auth::id();
         $paciente = Paciente::where('user_id', $userId)->get();
         $pacientesId = $paciente->pluck("id");
-        $tratamento = Tratamento::whereIn('paciente', $paciente)->get();
+        $tratamento = Tratamento::whereIn('paciente_id', $pacientesId)->get();
         return view('tratamento.index', compact('tratamento', 'pacientesId'));
     }
 
@@ -56,7 +56,8 @@ class TratamentoController extends Controller
     public function edit(string $id)
     {
         $tratamento = Tratamento::findOrfail($id);
-        return view('tratamento.edit', compact('tratamento'));
+        $pacientes = Paciente::all();
+        return view('tratamento.edit', compact('tratamento', 'pacientes'));
     }
 
     /**

@@ -16,7 +16,7 @@ class ProblemaController extends Controller
         $userId = Auth::id();
         $paciente = Paciente::where('user_id', $userId)->get();
         $pacientesId = $paciente->pluck("id");
-        $problema = Problema::whereIn('paciente', $paciente)->get();
+        $problema = Problema::whereIn('paciente_id', $pacientesId)->get();
         return view('problema.index', compact('problema', 'pacientesId'));
     }
 
@@ -55,7 +55,8 @@ class ProblemaController extends Controller
     public function edit(string $id)
     {
         $problema = Problema::findOrfail($id);
-        return view('problema.edit', compact('problema'));
+        $pacientes = Paciente::all();
+        return view('problema.edit', compact('problema', 'pacientes'));
     }
 
     /**

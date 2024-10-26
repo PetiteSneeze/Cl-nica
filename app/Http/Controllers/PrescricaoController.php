@@ -17,7 +17,7 @@ class PrescricaoController extends Controller
         $userId = Auth::id();
         $paciente = Paciente::where('user_id', $userId)->get();
         $pacientesId = $paciente->pluck("id");
-        $prescricao = Prescricao::whereIn('prescricao', $paciente)->get();
+        $prescricao = Prescricao::whereIn('paciente_id', $pacientesId)->get();
         return view('prescricao.index', compact('prescricao', 'pacientesId'));
     }
 
@@ -56,7 +56,8 @@ class PrescricaoController extends Controller
     public function edit(string $id)
     {
         $prescricao = Prescricao::findOrfail($id);
-        return view('prescricao.edit', compact('prescricao'));
+        $pacientes = Paciente::all();
+        return view('prescricao.edit', compact('prescricao','pacientes'));
     }
 
     /**

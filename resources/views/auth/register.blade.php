@@ -1,4 +1,4 @@
-<!--Register.blade.php-->
+<!-- Register.blade.php -->
 <x-guest-layout>
     <div class="container mt-5">
         <form method="POST" action="{{ route('register') }}">

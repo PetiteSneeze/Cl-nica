@@ -3,7 +3,7 @@
     <div class="container" style="max-width: 600px; margin-top: 40px;">
         <div class="card shadow-sm p-4" style="border-radius: 15px; background-color: #f8f9fa;">
             <h2 class="text-center mb-4" style="color: #4a5568;">Editar Paciente</h2>
-            <form action="{{ route('pacientes.update', $pacientes->id) }}" method="POST">
+            <form action="/pacientes/{{$paciente->id}}" method="POST">
                 @csrf
                 @method('PUT')
 

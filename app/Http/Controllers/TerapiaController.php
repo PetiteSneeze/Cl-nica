@@ -17,7 +17,7 @@ class TerapiaController extends Controller
         $userId = Auth::id();
         $paciente = Paciente::where('user_id', $userId)->get();
         $pacientesId = $paciente->pluck("id");
-        $terapia = Terapia::whereIn('paciente', $paciente)->get();
+        $terapia = Terapia::whereIn('paciente_id', $pacientesId)->get();
         return view('terapia.index', compact('terapia', 'pacientesId'));
     }
 
@@ -56,7 +56,8 @@ class TerapiaController extends Controller
     public function edit(string $id)
     {
         $terapia = Terapia::findOrfail($id);
-        return view('terapia.edit', compact('terapia'));
+        $pacientes = Paciente::all();
+        return view('terapia.edit', compact('terapia', 'pacientes'));
     }
 
     /**
