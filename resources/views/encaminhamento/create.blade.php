@@ -36,7 +36,7 @@
                 
 
                 <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary" style="padding: 10px 20px; border-radius: 10px; background-color: #4a90e2; border-color: #4a90e2; font-weight: 600;">
+                    <button type="submit" class="btn btn-primary" style="padding: 10px 20px; border-radius: 10px; background-color: #6495ED; border-color: #4a90e2; font-weight: 600;">
                         Cadastrar Encaminhamento
                     </button>
                 </div>

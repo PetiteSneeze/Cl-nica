@@ -1,11 +1,11 @@
-<div class="flex flex-col h-screen bg-gray-100">
-    <!-- Cabeçalho -->
+<!-- <div class="flex flex-col h-screen bg-gray-100">
+   Cabeçalho
     <header class="bg-white shadow-md py-4 px-6">
         <div class="flex justify-between items-center">
-            <!-- Nome de usuário à esquerda -->
+             Nome de usuário à esquerda -->
             <div class="text-lg font-semibold text-gray-800">Bem-vindo, {{ Auth::user()->name }}</div>
 
-            <!-- Menu centralizado -->
+            <!-- Menu centralizado
             <div class="w-full flex justify-center">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
@@ -35,7 +35,7 @@
                 </ul>
             </div>
 
-            <!-- Botão Sair à direita -->
+            Botão Sair à direita 
             <div class="ml-auto">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -47,11 +47,11 @@
         </div>
     </header>
 
-    <!-- Inclusão de scripts do Bootstrap se necessário -->
+    Inclusão de scripts do Bootstrap se necessário 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Estilo adicional para o layout -->
+    Estilo adicional para o layout 
     <style>
         .ml-auto {
             margin-left: auto;
@@ -63,4 +63,4 @@
             z-index: 1;
         }
     </style>
-</div>
+</div> 

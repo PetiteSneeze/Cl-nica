@@ -21,7 +21,7 @@
                         <td>{{ \Carbon\Carbon::parse($t->data)->format('d/m/Y') }}</td>
                         <td>{{ $t->tecnica }}</td>
                         <td>
-                            <a href="{{ route('terapia.show', $t->id) }}" class="btn btn-secondary">Visualizar Registro</a>
+                            <a href="{{ route('terapia.show', $t->id) }}" class="btn btn-secondary">Visualizar</a>
                             <a href="{{ route('terapia.edit', $t->id) }}"  class="btn btn-warning">Editar</a>
                         </td>
                     </tr>
@@ -31,7 +31,7 @@
 
             <!-- Botão para adicionar nova terapia -->
             <div class="text-center mt-4">
-                <a href="{{ route('terapia.create') }}" class="btn btn-primary" style="padding: 10px 20px; border-radius: 10px;">Nova Terapia</a>
+                <a href="{{ route('terapia.create') }}" class="btn btn-primary" style="padding: 10px 20px; border-radius: 10px; background-color: #6495ED;">Nova Terapia</a>
             </div>
         </div>
     </div>

@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('problema', ProblemaController::class);
     Route::resource('terapia', TerapiaController::class);
     Route::resource('tratamento', TratamentoController::class); 
+    Route::resource('paciente', PacienteController::class);
 });
 
 require __DIR__.'/auth.php';

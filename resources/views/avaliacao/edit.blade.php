@@ -1,4 +1,3 @@
-<!-- resources/views/avaliacao/create.blade.php -->
 <x-app-layout>
     <div class="container" style="max-width: 600px; margin-top: 40px;">
         <div class="card shadow-sm p-4" style="border-radius: 15px; background-color: #f8f9fa;">
@@ -6,6 +5,7 @@
             <form action="/avaliacao/{{$avaliacao->id}}" method="POST">
                 @csrf
                 @method('PUT')
+                
                 <!-- Campo Data da Avaliação -->
                 <div class="form-group mb-3">
                     <label for="data_avaliacao" style="color: #4a5568; font-weight: 600;">Data da Avaliação:</label>
@@ -25,10 +25,8 @@
                     <select name="paciente_id" id="paciente" class="form-control" required style="border-radius: 10px; border-color: #cbd5e0;">
                         <option value="">Selecione um paciente</option>
                         @foreach($pacientes as $p)
-                            <option value="{{ $p->id }}">{{ $p->nome }}
-
-                            {{ $p->id == $avaliacao->paciente_id ? 'selected':''}}
-
+                            <option value="{{ $p->id }}" {{ $p->id == $avaliacao->paciente_id ? 'selected' : '' }}>
+                                {{ $p->nome }}
                             </option>
                         @endforeach
                     </select>
@@ -36,7 +34,7 @@
                 
                 <!-- Botão para enviar o formulário -->
                 <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary" style="padding: 10px 20px; border-radius: 10px; background-color: #4a90e2; border-color: #4a90e2; font-weight: 600;">
+                    <button type="submit" class="btn btn-primary" style="padding: 10px 20px; border-radius: 10px; background-color: #6495ED; border-color: #4a90e2; font-weight: 600;">
                         Editar Avaliação
                     </button>
                 </div>

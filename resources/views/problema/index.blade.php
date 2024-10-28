@@ -21,7 +21,7 @@
                         <td>{{ \Carbon\Carbon::parse($p->data_identificacao)->format('d/m/Y') }}</td>
                        
                         <td>
-                            <a href="{{ route('problema.show', $p->id) }}" class="btn btn-secondary">Visualizar Registro</a>
+                            <a href="{{ route('problema.show', $p->id) }}" class="btn btn-secondary">Visualizar</a>
                             <a href="{{ route('problema.edit', $p->id) }}" class="btn btn-warning">Editar</a>
                         </td>
                     </tr>
@@ -31,7 +31,7 @@
 
             <!-- Botão para adicionar novo problema -->
             <div class="text-center mt-4">
-                <a href="{{ route('problema.create') }}" class="btn btn-primary" style="padding: 10px 20px; border-radius: 10px;">Novo Problema</a>
+                <a href="{{ route('problema.create') }}" class="btn btn-primary" style="padding: 10px 20px; border-radius: 10px;background-color: #6495ED;">Novo Problema</a>
             </div>
         </div>
     </div>

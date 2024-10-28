@@ -42,8 +42,8 @@ class PacienteController extends Controller
      */
     public function show(string $id)
     {
-        $paciente = Paciente::findOrFail($id);
-        return view('paciente.show', compact('paciente'));
+        $pacientes = Paciente::findOrFail($id);
+        return view('paciente.show', compact('pacientes'));
     }
 
     /**
@@ -51,8 +51,8 @@ class PacienteController extends Controller
      */
     public function edit(string $id)
     {
-        $paciente = Paciente::findOrFail($id);
-        return view('paciente.edit', compact('paciente'));
+        $pacientes = Paciente::findOrFail($id);
+        return view('paciente.edit', compact('pacientes'));
     }
 
     /**
@@ -60,8 +60,8 @@ class PacienteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $paciente = Paciente::findOrFail($id);
-        $paciente->update($request->all());
+        $pacientes = Paciente::findOrFail($id);
+        $pacientes->update($request->all());
         return redirect()->route('pacientes.index')
         ->with('success', 'Paciente atualizado com sucesso.'); 
                            

@@ -30,7 +30,7 @@
                             <td>{{ $presc->paciente->nome }}</td>
                             <td>{{ \Carbon\Carbon::parse($presc->data)->format('d/m/Y') }}</td>
                             <td>
-                                <a href="{{ route('prescricao.show', $presc->id) }}" class="btn btn-secondary">Visualizar registro</a>
+                                <a href="{{ route('prescricao.show', $presc->id) }}" class="btn btn-secondary">Visualizar</a>
                                 <a href="{{ route('prescricao.edit', $presc->id) }}" class="btn btn-warning">Editar</a>
                             </td>
                         </tr>
@@ -38,7 +38,7 @@
                 </tbody>
             </table>
             <div class="text-center mt-4">
-                <a href="{{ route('prescricao.create') }}" class="btn btn-primary" style="padding: 10px 20px; border-radius: 10px;">Nova Prescrição</a>
+                <a href="{{ route('prescricao.create') }}" class="btn btn-primary" style="padding: 10px 20px; border-radius: 10px; background-color: #6495ED;">Nova Prescrição</a>
             </div>
         </div>
     </div>

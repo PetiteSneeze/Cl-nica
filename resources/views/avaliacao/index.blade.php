@@ -27,7 +27,7 @@
                             <td>{{ $a->paciente->nome }}</td>
                             <td>{{ \Carbon\Carbon::parse($a->data_avaliacao)->format('d/m/Y') }}</td>
                             <td>
-                                <a href="{{ route('avaliacao.show', $a->id) }}" class="btn btn-secondary">Visualizar registro</a>
+                                <a href="{{ route('avaliacao.show', $a->id) }}" class="btn btn-secondary">Visualizar</a>
                                 <a href="{{ route('avaliacao.edit', $a->id) }}" class="btn btn-warning">Editar</a>
                             </td>
                         </tr>
@@ -36,7 +36,7 @@
             </table>
 
             <div class="text-center mt-4">
-                <a href="{{ route('avaliacao.create') }}" class="btn btn-primary" style="padding: 10px 20px; border-radius: 10px;">Nova Avaliação</a>
+                <a href="{{ route('avaliacao.create') }}" class="btn btn-primary" style="padding: 10px 20px; border-radius: 10px;background-color: #6495ED;">Nova Avaliação</a>
             </div>
         </div>
     </div>

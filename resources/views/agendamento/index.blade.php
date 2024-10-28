@@ -30,7 +30,7 @@
                             <td>{{ \Carbon\Carbon::parse($ag->hora)->format('H:i') }}</td>
                             <td>
                                 <a href="{{ route('agendamento.show', $ag->id) }}" class="btn btn-secondary">
-                                    Visualizar registro
+                                    Visualizar
                                 </a>
                                 <a href="{{ route('agendamento.edit', $ag->id) }}" class="btn btn-warning">
                                     Editar
@@ -42,7 +42,7 @@
             </table>
 
             <div class="text-center mt-4">
-                <a href="{{ route('agendamento.create') }}" class="btn btn-primary" style="padding: 10px 20px; border-radius: 10px;">Novo Agendamento</a>
+                <a href="{{ route('agendamento.create') }}" class="btn btn-primary" style="padding: 10px 20px; border-radius: 10px;background-color: #6495ED; ">Novo Agendamento</a>
             </div>
         </div>
     </div>
