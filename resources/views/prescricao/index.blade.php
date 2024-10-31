@@ -14,10 +14,21 @@
                 </div>
             @endif
 
+            <!-- Formulário de Busca -->
+            <form method="GET" action="{{ route('prescricao.index') }}" class="mb-4" id="searchForm">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Buscar por nome do paciente ou data da prescrição" value="{{ request('search') }}" id="searchInput">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary" style="background-color: #6495ED;">
+                            Buscar
+                        </button>
+                    </div>
+                </div>
+            </form>
+
             <table class="table table-striped">
                 <thead>
                     <tr>
-                     
                         <th>Paciente</th>
                         <th>Data</th>
                         <th>Ações</th>
@@ -26,7 +37,6 @@
                 <tbody>
                     @foreach ($prescricao as $presc)
                         <tr>
-                           
                             <td>{{ $presc->paciente->nome }}</td>
                             <td>{{ \Carbon\Carbon::parse($presc->data)->format('d/m/Y') }}</td>
                             <td>
@@ -37,9 +47,19 @@
                     @endforeach
                 </tbody>
             </table>
+
             <div class="text-center mt-4">
                 <a href="{{ route('prescricao.create') }}" class="btn btn-primary" style="padding: 10px 20px; border-radius: 10px; background-color: #6495ED;">Nova Prescrição</a>
             </div>
         </div>
     </div>
+
+    <!-- JavaScript para submeter o formulário quando o campo de busca estiver vazio -->
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            if (this.value === '') {
+                document.getElementById('searchForm').submit();
+            }
+        });
+    </script>
 </x-app-layout>

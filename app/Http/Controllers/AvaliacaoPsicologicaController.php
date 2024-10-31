@@ -12,14 +12,28 @@ class AvaliacaoPsicologicaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $userId = Auth::id();
         $paciente = Paciente::where('user_id', $userId)->get();
         $pacientesId = $paciente->pluck("id");
-        $avaliacao = AvaliacaoPsicologica::whereIn('paciente_id', $pacientesId)->get();
-        return view('avaliacao.index', compact('avaliacao'));
+    
+        // Obter o termo de pesquisa
+        $search = $request->input('search');
+    
+        // Consulta de avaliações psicológicas com filtro por paciente e pesquisa
+        $avaliacao = AvaliacaoPsicologica::whereIn('paciente_id', $pacientesId)
+            ->when($search, function ($query, $search) {
+                return $query->whereHas('paciente', function ($query) use ($search) {
+                        $query->where('nome', 'like', '%' . $search . '%');
+                    })
+                    ->orWhere('data_avaliacao', 'like', '%' . $search . '%');
+            })
+            ->get();
+    
+        return view('avaliacao.index', compact('avaliacao', 'pacientesId'));
     }
+    
 
     /**
      * Show the form for creating a new resource.

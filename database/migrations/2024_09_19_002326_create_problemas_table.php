@@ -20,6 +20,7 @@ return new class extends Migration
                 ->onDelete("restrict");
             $table->date("data_identificacao");
             $table->text("evolucao");
+            $table->text("problema");
             $table->timestamps();
         });
     }

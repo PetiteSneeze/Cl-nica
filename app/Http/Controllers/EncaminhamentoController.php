@@ -13,14 +13,29 @@ class EncaminhamentoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $userId = Auth::id();
-        $paciente = Paciente::where('user_id', $userId)->get();
-        $pacientesId = $paciente->pluck("id");
-        $encaminhamento = Encaminhamento::whereIn('paciente_id', $pacientesId)->get();
-        return view('encaminhamento.index', compact('encaminhamento', 'pacientesId'));
-    }
+    public function index(Request $request)
+{
+    $userId = Auth::id();
+    $paciente = Paciente::where('user_id', $userId)->get();
+    $pacientesId = $paciente->pluck("id");
+
+    // Obter o termo de pesquisa
+    $search = $request->input('search');
+
+    // Consulta de encaminhamentos com filtro por paciente e pesquisa
+    $encaminhamento = Encaminhamento::whereIn('paciente_id', $pacientesId)
+        ->when($search, function ($query, $search) {
+            return $query->whereHas('paciente', function ($query) use ($search) {
+                    $query->where('nome', 'like', '%' . $search . '%');
+                })
+                ->orWhere('data', 'like', '%' . $search . '%');
+        })
+        ->get();
+
+    return view('encaminhamento.index', compact('encaminhamento', 'pacientesId'));
+}
+
+    
 
     /**
      * Show the form for creating a new resource.

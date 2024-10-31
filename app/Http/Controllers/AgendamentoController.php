@@ -11,14 +11,28 @@ class AgendamentoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $userId = Auth::id();
-        $paciente = Paciente::where('user_id', $userId)->get();
-        $pacientesId = $paciente->pluck("id");
-        $agendamento = Agendamento::whereIn('paciente_id', $pacientesId)->get();
-        return view('agendamento.index', compact('agendamento', 'pacientesId'));
-    }
+    public function index(Request $request)
+{
+    $userId = Auth::id();
+    $paciente = Paciente::where('user_id', $userId)->get();
+    $pacientesId = $paciente->pluck("id");
+
+    // Obter o termo de pesquisa
+    $search = $request->input('search');
+
+    // Consulta de agendamentos com filtro por paciente e pesquisa
+    $agendamento = Agendamento::whereIn('paciente_id', $pacientesId)
+        ->when($search, function ($query, $search) {
+            return $query->whereHas('paciente', function ($query) use ($search) {
+                    $query->where('nome', 'like', '%' . $search . '%');
+                });
+        })
+        ->get();
+
+    return view('agendamento.index', compact('agendamento', 'pacientesId'));
+}
+
+
 
     /**
      * Show the form for creating a new resource.

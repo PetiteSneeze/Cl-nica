@@ -12,14 +12,29 @@ class TratamentoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $userId = Auth::id();
         $paciente = Paciente::where('user_id', $userId)->get();
         $pacientesId = $paciente->pluck("id");
-        $tratamento = Tratamento::whereIn('paciente_id', $pacientesId)->get();
+    
+        // Obter o termo de pesquisa
+        $search = $request->input('search');
+    
+        // Consulta de tratamento com filtro por paciente e pesquisa
+        $tratamento = Tratamento::whereIn('paciente_id', $pacientesId)
+            ->when($search, function ($query, $search) {
+                return $query->whereHas('paciente', function ($query) use ($search) {
+                        $query->where('nome', 'like', '%' . $search . '%');
+                    })
+                    ->orWhere('data_inicio', 'like', '%' . $search . '%')
+                    ->orWhere('objetivos', 'like', '%' . $search . '%');
+            })
+            ->get();
+    
         return view('tratamento.index', compact('tratamento', 'pacientesId'));
     }
+    
 
     /**
      * Show the form for creating a new resource.

@@ -12,14 +12,30 @@ class TerapiaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $userId = Auth::id();
         $paciente = Paciente::where('user_id', $userId)->get();
         $pacientesId = $paciente->pluck("id");
-        $terapia = Terapia::whereIn('paciente_id', $pacientesId)->get();
+    
+        // Obter o termo de pesquisa
+        $search = $request->input('search');
+    
+        // Consulta de terapia com filtro por paciente e pesquisa
+        $terapia = Terapia::whereIn('paciente_id', $pacientesId)
+            ->when($search, function ($query, $search) {
+                return $query->whereHas('paciente', function ($query) use ($search) {
+                        $query->where('nome', 'like', '%' . $search . '%');
+                    })
+                    ->orWhere('data', 'like', '%' . $search . '%')
+                    ->orWhere('tecnica', 'like', '%' . $search . '%');
+            })
+            ->get();
+    
         return view('terapia.index', compact('terapia', 'pacientesId'));
     }
+    
+
 
     /**
      * Show the form for creating a new resource.

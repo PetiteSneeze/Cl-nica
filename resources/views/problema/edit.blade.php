@@ -29,6 +29,12 @@
                     <textarea name="evolucao" id="evolucao" class="form-control" required style="border-radius: 10px; border-color: #cbd5e0;">{{ $problema->evolucao }}</textarea>
                 </div>
 
+                <!-- Campo Evolução -->
+                <div class="form-group mb-3">
+                    <label for="problema" style="color: #4a5568; font-weight: 600;">Condição:</label>
+                    <textarea name="problema" id="problema" class="form-control" required style="border-radius: 10px; border-color: #cbd5e0;">{{ $problema->problema }}</textarea>
+                </div>
+
                 <!-- Botão para atualizar -->
                 <div class="form-group text-center">
                     <button type="submit" class="btn btn-primary" style="padding: 10px 20px; border-radius: 10px; background-color: #6495ED;">Atualizar</button>

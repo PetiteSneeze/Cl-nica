@@ -4,6 +4,18 @@
         <div class="card shadow-sm p-4" style="border-radius: 15px; background-color: #f8f9fa;">
             <h2 class="text-center mb-4" style="color: #4a5568;">Lista de Tratamentos</h2>
 
+            <!-- Formulário de Busca -->
+            <form method="GET" action="{{ route('tratamento.index') }}" class="mb-4" id="searchForm">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Buscar por nome do paciente, data de início ou objetivos" value="{{ request('search') }}" id="searchInput">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary" style="background-color: #6495ED;">
+                            Buscar
+                        </button>
+                    </div>
+                </div>
+            </form>
+
             <!-- Tabela de Tratamentos -->
             <table class="table table-striped">
                 <thead style="color: #4a5568; font-weight: 600;">
@@ -35,4 +47,13 @@
             </div>
         </div>
     </div>
+
+    <!-- JavaScript para submeter o formulário quando o campo de busca estiver vazio -->
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            if (this.value === '') {
+                document.getElementById('searchForm').submit();
+            }
+        });
+    </script>
 </x-app-layout>

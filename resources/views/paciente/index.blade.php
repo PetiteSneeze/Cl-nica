@@ -9,6 +9,18 @@
                 </div>
             @endif
 
+            <!-- Formulário de Busca -->
+            <form method="GET" action="{{ route('pacientes.index') }}" class="mb-4" id="searchForm">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Buscar por nome ou telefone" value="{{ request('search') }}" id="searchInput">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary" style="background-color: #6495ED;">
+                            Buscar
+                        </button>
+                    </div>
+                </div>
+            </form>
+
             <!-- Tabela de Pacientes -->
             <table class="table table-striped">
                 <thead>
@@ -16,7 +28,6 @@
                         <th>Nome</th>
                         <th>Data de Nascimento</th>
                         <th>Telefone</th>
-                      
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -26,14 +37,9 @@
                             <td>{{ $p->nome }}</td>
                             <td>{{ \Carbon\Carbon::parse($p->data_nascimento)->format('d/m/Y') }}</td>
                             <td>{{ $p->telefone }}</td>
-                            
                             <td>
-                                <a href="{{ route('pacientes.show', $p->id) }}" class="btn btn-secondary" class="btn btn-secondary">Visualizar</a>
-                                    
-                                </a>
-                                <a href="{{ route('pacientes.edit', $p->id) }}" class="btn btn-warning"  class="btn btn-warning">Editar</a>
-                                    
-                                </a>
+                                <a href="{{ route('pacientes.show', $p->id) }}" class="btn btn-secondary">Visualizar</a>
+                                <a href="{{ route('pacientes.edit', $p->id) }}" class="btn btn-warning">Editar</a>
                             </td>
                         </tr>
                     @endforeach
@@ -46,6 +52,12 @@
         </div>
     </div>
 
-    <!-- Link para Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMZ7V0iLvYZgt02M4wvYpjoP0U0I8go3w4fzNzM" crossorigin="anonymous">
+    <!-- JavaScript para submeter o formulário quando o campo de busca estiver vazio -->
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            if (this.value === '') {
+                document.getElementById('searchForm').submit();
+            }
+        });
+    </script>
 </x-app-layout>

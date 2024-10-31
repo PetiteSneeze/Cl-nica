@@ -10,12 +10,26 @@ class PacienteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $userId = Auth::id();
-        $pacientes = Paciente::where('user_id', $userId)->get();
-        return view('paciente.index', compact('pacientes'));
-    }
+    public function index(Request $request)
+{
+    $userId = Auth::id();
+
+    // Obter o termo de pesquisa
+    $search = $request->input('search');
+
+    // Consulta de pacientes com filtro pelo usuário autenticado e pesquisa
+    $pacientes = Paciente::where('user_id', $userId)
+        ->when($search, function ($query, $search) {
+            return $query->where('nome', 'like', '%' . $search . '%')
+                         ->orWhere('data_nascimento', 'like', '%' . $search . '%')
+                         ->orWhere('telefone', 'like', '%' . $search . '%');
+        })
+        ->get();
+
+    return view('paciente.index', compact('pacientes'));
+}
+
+    
 
     /**
      * Show the form for creating a new resource.

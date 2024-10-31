@@ -2,7 +2,7 @@
 <x-app-layout>
     <div class="container" style="max-width: 600px; margin-top: 40px;">
         <div class="card shadow-sm p-4" style="border-radius: 15px; background-color: #f8f9fa;">
-            <h2 class="text-center mb-4" style="color: #4a5568;">Novo Problema</h2>
+            <h2 class="text-center mb-4" style="color: #4a5568;">Nova Condição</h2>
             <form action="{{ route('problema.store') }}" method="POST">
                 @csrf
 
@@ -20,6 +20,12 @@
                 <div class="form-group mb-3">
                     <label for="data_identificacao" style="color: #4a5568; font-weight: 600;">Data de Identificação:</label>
                     <input type="date" name="data_identificacao" id="data_identificacao" class="form-control" required style="border-radius: 10px; border-color: #cbd5e0;">
+                </div>
+                
+                <!-- Campo Evolução -->
+                <div class="form-group mb-3">
+                    <label for="problema" style="color: #4a5568; font-weight: 600;">Condição:</label>
+                    <textarea name="problema" id="problema" class="form-control" required style="border-radius: 10px; border-color: #cbd5e0;"></textarea>
                 </div>
 
                 <!-- Campo Evolução -->

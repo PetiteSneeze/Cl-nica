@@ -21,6 +21,10 @@
                 <p id="evolucao" class="form-control" style="border-radius: 10px; border-color: #cbd5e0;">{{ $problema->evolucao }}</p>
             </div>
 
+            <div class="form-group mb-3">
+                <label for="problema" style="color: #4a5568; font-weight: 600;">Condição:</label>
+                <p id="problema" class="form-control" style="border-radius: 10px; border-color: #cbd5e0;">{{ $problema->problema }}</p>
+            </div>
             <!-- Botão para voltar -->
             <div class="form-group text-center">
                 <a href="{{ route('problema.index') }}" class="btn btn-secondary" style="padding: 10px 20px; border-radius: 10px;">Voltar</a>

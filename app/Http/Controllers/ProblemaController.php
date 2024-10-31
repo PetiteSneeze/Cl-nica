@@ -11,14 +11,29 @@ class ProblemaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $userId = Auth::id();
         $paciente = Paciente::where('user_id', $userId)->get();
         $pacientesId = $paciente->pluck("id");
-        $problema = Problema::whereIn('paciente_id', $pacientesId)->get();
+    
+        // Obter o termo de pesquisa
+        $search = $request->input('search');
+    
+        // Consulta de problema com filtro por paciente e pesquisa
+        $problema = Problema::whereIn('paciente_id', $pacientesId)
+            ->when($search, function ($query, $search) {
+                return $query->whereHas('paciente', function ($query) use ($search) {
+                        $query->where('nome', 'like', '%' . $search . '%');
+                    })
+                    ->orWhere('data_identificacao', 'like', '%' . $search . '%');
+            })
+            ->get();
+    
         return view('problema.index', compact('problema', 'pacientesId'));
     }
+    
+
 
     /**
      * Show the form for creating a new resource.

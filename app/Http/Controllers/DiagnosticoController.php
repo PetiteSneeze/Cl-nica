@@ -11,14 +11,30 @@ class DiagnosticoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $userId = Auth::id();
         $paciente = Paciente::where('user_id', $userId)->get();
         $pacientesId = $paciente->pluck("id");
-        $diagnostico = Diagnostico::whereIn('paciente_id', $pacientesId)->get();
+    
+        // Obter o termo de pesquisa
+        $search = $request->input('search');
+    
+        // Consulta de diagnósticos com filtro por paciente e pesquisa
+        $diagnostico = Diagnostico::whereIn('paciente_id', $pacientesId)
+            ->when($search, function ($query, $search) {
+                return $query->whereHas('paciente', function ($query) use ($search) {
+                        $query->where('nome', 'like', '%' . $search . '%');
+                    })
+                    ->orWhere('data', 'like', '%' . $search . '%')
+                    ->orWhere('diagnostico', 'like', '%' . $search . '%');
+            })
+            ->get();
+    
         return view('diagnostico.index', compact('diagnostico', 'pacientesId'));
     }
+    
+    
 
     /**
      * Show the form for creating a new resource.
