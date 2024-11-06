@@ -4,6 +4,16 @@
         <div class="card shadow-sm p-4" style="border-radius: 15px; background-color: #f8f9fa;">
             <h2 class="text-center mb-4" style="color: #4a5568;">Lista de Tratamentos</h2>
 
+            @if (session('insercao'))
+                <div class="alert alert-success">
+                    {{ session('insercao') }}
+                </div>
+            @elseif (session('atualizacao'))
+                <div class="alert alert-success">
+                    {{ session('atualizacao') }}
+                </div>
+            @endif
+            
             <!-- Formulário de Busca -->
             <form method="GET" action="{{ route('tratamento.index') }}" class="mb-4" id="searchForm">
                 <div class="input-group">

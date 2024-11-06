@@ -3,9 +3,13 @@
         <div class="card shadow-sm p-4" style="border-radius: 15px; background-color: #f8f9fa;">
             <h2 class="text-center mb-4" style="color: #4a5568;">Lista de Pacientes</h2>
 
-            @if (session('success'))
+            @if (session('insercao'))
                 <div class="alert alert-success">
-                    {{ session('success') }}
+                    {{ session('insercao') }}
+                </div>
+            @elseif (session('atualizacao'))
+                <div class="alert alert-success">
+                    {{ session('atualizacao') }}
                 </div>
             @endif
 
